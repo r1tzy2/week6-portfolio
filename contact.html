@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YangZhang — Contact Me</title>
+  <meta name="description" content="Say hello! I'd love to hear from you." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav">
+      <a href="index.html" class="nav-brand">Yang<span>Zhang</span></a>
+      <button class="nav-toggle" aria-label="Toggle menu" onclick="document.getElementById('navLinks').classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="resume.html">Resume</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html" class="active">Contact Me</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="page-header">
+        <h1>Say Hello 👋</h1>
+        <p>Whether it's a project, a question, or just a wave — I'd love to hear from you.</p>
+      </div>
+
+      <div class="contact-grid">
+        <!-- Contact details -->
+        <section class="card">
+          <h2 style="font-size: 1.35rem; margin-bottom: 10px;">Reach me directly</h2>
+          <p style="color: var(--muted); margin-bottom: 8px;">
+            I usually reply within a day or two. Mornings (with coffee) are my favorite time to write back.
+          </p>
+          <ul class="contact-list">
+            <li>
+              <span class="contact-icon">✉️</span>
+              <div>
+                <div class="label">Email</div>
+                <div class="value">YangZhang2602@student.xjtlu.edu.cn</div>
+              </div>
+            </li>
+            <li>
+              <span class="contact-icon">🐦</span>
+              <div>
+                <div class="label">Social</div>
+                <div class="value">111222333</div>
+              </div>
+            </li>
+            <li>
+              <span class="contact-icon">📍</span>
+              <div>
+                <div class="label">Based in</div>
+                <div class="value">Hangzhou, Zhejiang</div>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Contact form -->
+        <section class="card">
+          <h2 style="font-size: 1.35rem; margin-bottom: 18px;">Send me a note</h2>
+          <form class="contact-form" onsubmit="event.preventDefault(); alert('Thanks for your message! I\\'ll get back to you soon. 🌷');">
+            <div class="form-group">
+              <label for="name">Your name</label>
+              <input type="text" id="name" name="name" placeholder="e.g. Jamie Chen" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Your email</label>
+              <input type="email" id="email" name="email" placeholder="you@example.com" required />
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" placeholder="Tell me what's on your mind..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send message</button>
+            <p class="form-note">This is a demo form — connect it to your email service to start receiving notes.</p>
+          </form>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="fun-fact">
+        <p>
+          <span class="fun-fact-emoji">🌱</span>
+          <strong>Fun facts about me:</strong> I once kept a houseplant alive for 9 years — and named him "Captain Leaves".
+        </p>
+        <p>
+          <span class="fun-fact-emoji">💅</span>
+          I once did the nail salon.
+        </p>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="resume.html">Resume</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

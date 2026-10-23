@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YangZhang — Home</title>
+  <meta name="description" content="Hi, I'm YangZhang — a man who loves sports. Welcome to my personal site." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- ===== Header / Nav ===== -->
+  <header class="site-header">
+    <nav class="nav">
+      <a href="index.html" class="nav-brand">Yang<span>Zhang</span></a>
+      <button class="nav-toggle" aria-label="Toggle menu" onclick="document.getElementById('navLinks').classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="resume.html">Resume</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Contact Me</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="container">
+      <!-- ===== Hero ===== -->
+      <section class="hero">
+        <div class="hero-content">
+          <p class="hero-tagline"><span class="wave">👋</span> Hello there, welcome!</p>
+          <h1>Hi, I'm YangZhang</h1>
+          <p class="hero-intro">
+            I'm a man who loves sports. Whether it's basketball, a morning run,
+            or cheering on my favorite team, you'll always find me on the move
+            and ready for the next game.
+          </p>
+          <div class="hero-actions">
+            <a href="projects.html" class="btn btn-primary">See my work</a>
+            <a href="contact.html" class="btn btn-outline">Say hello</a>
+          </div>
+        </div>
+        <div class="hero-photo">
+          <div class="avatar-wrap">
+            <img class="avatar"
+              src="images/avatar.jpg"
+              alt="Portrait of YangZhang"
+              width="300" height="300" />
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== Three things I like ===== -->
+      <section class="likes">
+        <h2 class="section-title">Three things I love</h2>
+        <p class="section-subtitle">The little joys that keep me going.</p>
+        <div class="likes-grid">
+          <div class="like-card">
+            <span class="like-icon">☕</span>
+            <h3>Café Hopping</h3>
+            <p>There's nothing like a good flat white and a cozy corner to spark fresh ideas.</p>
+          </div>
+          <div class="like-card">
+            <span class="like-icon">🎨</span>
+            <h3>Sketching</h3>
+            <p>I doodle everything — from city streets to little plants on my desk.</p>
+          </div>
+          <div class="like-card">
+            <span class="like-icon">🍰</span>
+            <h3>Baking Sweets</h3>
+            <p>My weekend ritual: a new cake recipe, a messy kitchen, and very happy friends.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== Favorite songs ===== -->
+      <section class="movies">
+        <h2 class="section-title">Three songs I love</h2>
+        <p class="section-subtitle">The tracks I have on repeat.</p>
+        <ol class="movie-list">
+          <li>晴天</li>
+          <li>枫</li>
+          <li>爱在西元前</li>
+        </ol>
+      </section>
+    </div>
+  </main>
+
+  <!-- ===== Footer with fun fact ===== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="fun-fact">
+        <p>
+          <span class="fun-fact-emoji">🌱</span>
+          <strong>Fun facts about me:</strong> I once kept a houseplant alive for 9 years — and named him "Captain Leaves".
+        </p>
+        <p>
+          <span class="fun-fact-emoji">💅</span>
+          I once did the nail salon.
+        </p>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="resume.html">Resume</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

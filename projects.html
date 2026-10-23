@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YangZhang — Projects</title>
+  <meta name="description" content="A few projects by YangZhang." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav">
+      <a href="index.html" class="nav-brand">Yang<span>Zhang</span></a>
+      <button class="nav-toggle" aria-label="Toggle menu" onclick="document.getElementById('navLinks').classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="resume.html">Resume</a></li>
+        <li><a href="projects.html" class="active">Projects</a></li>
+        <li><a href="contact.html">Contact Me</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="page-header">
+        <h1>Projects</h1>
+        <p>A to-do list, a live weather search, a world-time lookup, and an interactive gravity sandbox — all vanilla JavaScript.</p>
+      </div>
+
+      <section class="todo-app card" aria-label="To-do list">
+        <div class="todo-layout">
+          <div class="todo-calendar">
+            <div class="cal-header">
+              <button type="button" class="cal-nav" data-action="prev" aria-label="Previous month">&lsaquo;</button>
+              <h3 class="cal-title" id="calTitle">Month</h3>
+              <button type="button" class="cal-nav" data-action="next" aria-label="Next month">&rsaquo;</button>
+            </div>
+            <div class="cal-weekdays" aria-hidden="true">
+              <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+            </div>
+            <div class="cal-grid" id="calGrid"></div>
+          </div>
+
+          <div class="todo-main">
+            <form class="todo-form" id="todoForm">
+              <label for="todoInput" class="todo-label">New task</label>
+              <div class="todo-input-row">
+                <input type="text" id="todoInput" class="todo-input" placeholder="e.g. Finish the quarterly report" autocomplete="off" required />
+                <button type="submit" class="btn btn-primary todo-add" id="todoAdd">Add</button>
+              </div>
+              <div class="todo-date-line">
+                <span class="todo-date-tag is-empty" id="todoDateTag">No date selected</span>
+                <button type="button" class="todo-today" id="todoToday">Today</button>
+              </div>
+              <div class="todo-priority" role="group" aria-label="Task priority">
+                <span class="todo-priority-label">Priority</span>
+                <div class="todo-priority-group" id="todoPriority">
+                  <button type="button" class="priority-btn" data-priority="low">Low</button>
+                  <button type="button" class="priority-btn is-active" data-priority="medium">Medium</button>
+                  <button type="button" class="priority-btn" data-priority="high">High</button>
+                </div>
+              </div>
+            </form>
+
+            <p class="todo-status" id="todoStatus" hidden></p>
+            <p class="todo-counter" id="todoCounter" hidden>0 of 0 tasks completed</p>
+            <ul class="todo-list" id="todoList"></ul>
+            <p class="todo-empty" id="todoEmpty">No tasks yet. Pick a date and add one.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="weather-app card" aria-label="Weather search">
+        <h2 class="weather-title">Weather</h2>
+        <p class="weather-sub">Search any city for its current conditions.</p>
+
+        <form class="weather-form" id="weatherForm">
+          <label for="weatherInput" class="weather-label">City</label>
+          <div class="weather-input-row">
+            <input
+              type="text"
+              id="weatherInput"
+              class="weather-input"
+              placeholder="e.g. Hangzhou"
+              autocomplete="off"
+            />
+            <button type="submit" class="btn btn-primary weather-search" id="weatherSearch">Search</button>
+          </div>
+        </form>
+
+        <p class="weather-status" id="weatherStatus" role="status" aria-live="polite" hidden></p>
+
+        <div class="weather-candidates" id="weatherCandidates" hidden></div>
+
+        <div class="weather-result" id="weatherResult" hidden>
+          <div class="weather-current">
+            <div class="weather-icon" id="weatherIcon" aria-hidden="true">🌡️</div>
+            <div class="weather-info">
+              <h3 class="weather-city" id="weatherCityName"></h3>
+              <div class="weather-temp-row">
+                <div class="weather-temp" id="weatherTemp"></div>
+                <div class="weather-unit" id="weatherUnit" role="group" aria-label="Temperature unit">
+                  <button type="button" class="unit-btn is-active" data-unit="C">°C</button>
+                  <button type="button" class="unit-btn" data-unit="F">°F</button>
+                </div>
+              </div>
+              <div class="weather-cond" id="weatherCond"></div>
+            </div>
+          </div>
+          <div class="weather-forecast" id="weatherForecast" hidden></div>
+        </div>
+      </section>
+
+      <section class="worldtime-app card" aria-label="World time search">
+        <h2 class="worldtime-title">World Time</h2>
+        <p class="worldtime-sub">Look up the current local time in any city.</p>
+
+        <form class="worldtime-form" id="worldTimeForm">
+          <label for="worldTimeInput" class="worldtime-label">City</label>
+          <div class="worldtime-input-row">
+            <input
+              type="text"
+              id="worldTimeInput"
+              class="worldtime-input"
+              placeholder="e.g. Tokyo"
+              autocomplete="off"
+            />
+            <button type="submit" class="btn btn-primary worldtime-search" id="worldTimeSearch">Search</button>
+          </div>
+        </form>
+
+        <p class="worldtime-status" id="worldTimeStatus" role="status" aria-live="polite" hidden></p>
+
+        <div class="worldtime-result" id="worldTimeResult" hidden>
+          <div class="worldtime-clock" id="worldTimeClock"></div>
+          <div class="worldtime-city" id="worldTimeCityName"></div>
+          <div class="worldtime-date" id="worldTimeDate"></div>
+          <div class="worldtime-zone" id="worldTimeZone"></div>
+        </div>
+      </section>
+
+      <section class="physics-app card" aria-label="Gravity sandbox">
+        <h2 class="physics-title">Mechanics Phenomena Visualized</h2>
+        <p class="physics-sub">An interactive n-body gravity sandbox on a dark canvas — slingshot planets, tune gravity, and watch them collide, merge, and orbit.</p>
+        <a class="btn btn-primary physics-launch" href="physics.html">Open the Simulation &rarr;</a>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="fun-fact">
+        <p>
+          <span class="fun-fact-emoji">🌱</span>
+          <strong>Fun facts about me:</strong> I once kept a houseplant alive for 9 years — and named him "Captain Leaves".
+        </p>
+        <p>
+          <span class="fun-fact-emoji">💅</span>
+          I once did the nail salon.
+        </p>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="resume.html">Resume</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </footer>
+  <script>
+    (function () {
+      "use strict";
+
+      /* ===== Supabase REST ===== */
+      var SUPABASE_URL = "https://ibzqklfctxyyjzqisvtt.supabase.co";
+      var SUPABASE_KEY = "sb_publishable_bp__ZBNkRANd52PxvVo2Yw_0Z9rYJ5S";
+      var TODOS_URL = SUPABASE_URL + "/rest/v1/todos";
+      var HEADERS = {
+        "apikey": SUPABASE_KEY,
+        "Authorization": "Bearer " + SUPABASE_KEY,
+        "Content-Type": "application/json"
+      };
+
+      function dbRequest(method, query, body, prefer) {
+        var headers = Object.assign({}, HEADERS);
+        if (prefer) headers["Prefer"] = prefer;
+        var attempt = 0;
+        function tryOnce() {
+          attempt++;
+          return fetch(TODOS_URL + (query || ""), {
+            method: method,
+            headers: headers,
+            body: body ? JSON.stringify(body) : undefined
+          }).then(function (res) {
+            if (!res.ok) {
+              return res.text().then(function (t) {
+                throw new Error("Supabase " + res.status + ": " + t);
+              });
+            }
+            return res.status === 204 ? null : res.json();
+          }).catch(function (err) {
+            // Retry only network-level failures (not 4xx/5xx responses)
+            if (attempt < 3 && err instanceof TypeError) {
+              return new Promise(function (r) { setTimeout(r, 800 * attempt); }).then(tryOnce);
+            }
+            throw err;
+          });
+        }
+        return tryOnce();
+      }
+
+      function rowToTask(row) {
+        return {
+          id: row.id,
+          text: row.task,
+          date: row.date,
+          priority: row.priority || "medium",
+          done: !!row.done
+        };
+      }
+
+      function dbLoadAll() {
+        return dbRequest("GET", "?select=*&order=created_at.asc")
+          .then(function (rows) { return rows.map(rowToTask); });
+      }
+
+      function dbInsert(task) {
+        return dbRequest("POST", "", {
+          task: task.text,
+          date: task.date,
+          priority: task.priority,
+          done: task.done
+        }, "return=representation").then(function (rows) {
+          return rowToTask(rows[0]);
+        });
+      }
+
+      function dbUpdate(id, patch) {
+        return dbRequest("PATCH", "?id=eq." + encodeURIComponent(id), patch);
+      }
+
+      function dbDelete(id) {
+        return dbRequest("DELETE", "?id=eq." + encodeURIComponent(id));
+      }
+
+      /* ===== Offline queue ===== */
+      var PENDING_KEY = "todo.pendingOps";
+      function getPending() {
+        try {
+          var raw = localStorage.getItem(PENDING_KEY);
+          return raw ? JSON.parse(raw) : [];
+        } catch (e) { return []; }
+      }
+      function setPending(arr) {
+        try { localStorage.setItem(PENDING_KEY, JSON.stringify(arr)); } catch (e) {}
+      }
+      function enqueue(op) {
+        var q = getPending();
+        q.push(op);
+        setPending(q);
+      }
+      function dequeue(index) {
+        var q = getPending();
+        q.splice(index, 1);
+        setPending(q);
+      }
+      function syncPending() {
+        var q = getPending();
+        if (!q.length) return Promise.resolve();
+        var remaining = [];
+        var insertTasks = [];
+        var insertItems = [];
+        var promises = [];
+        q.forEach(function (op, idx) {
+          if (op.type === "insert") {
+            insertTasks.push({ idx: idx, task: op.task });
+          } else if (op.type === "update") {
+            promises.push(
+              dbUpdate(op.id, op.patch).then(function () { return { ok: true, idx: idx }; })
+                .catch(function () { return { ok: false, idx: idx }; })
+            );
+          } else if (op.type === "delete") {
+            promises.push(
+              dbDelete(op.id).then(function () { return { ok: true, idx: idx }; })
+                .catch(function () { return { ok: false, idx: idx }; })
+            );
+          }
+        });
+        // Bulk insert pending inserts in one request
+        if (insertTasks.length) {
+          var rows = insertTasks.map(function (it) {
+            return { task: it.task.text, date: it.task.date, priority: it.task.priority, done: it.task.done };
+          });
+          promises.push(
+            dbRequest("POST", "", rows, "return=representation").then(function (savedRows) {
+              return insertTasks.map(function (it, i) {
+                return { ok: true, idx: it.idx, saved: rowToTask(savedRows[i]) };
+              });
+            }).catch(function () {
+              return insertTasks.map(function (it) {
+                return { ok: false, idx: it.idx };
+              });
+            })
+          );
+        }
+        return Promise.all(promises).then(function (results) {
+          var flat = [];
+          results.forEach(function (r) {
+            if (Array.isArray(r)) { flat = flat.concat(r); } else { flat.push(r); }
+          });
+          // Update any pending local tasks with real IDs from successful bulk inserts
+          flat.forEach(function (res) {
+            if (res.ok && res.saved) {
+              var localIdx = tasks.findIndex(function (t) {
+                return t._pending && t.date === res.saved.date && t.text === res.saved.text && t.priority === res.saved.priority;
+              });
+              if (localIdx !== -1) {
+                tasks[localIdx].id = res.saved.id;
+                tasks[localIdx]._pending = false;
+              }
+            }
+          });
+          var failed = flat.filter(function (r) { return !r.ok; }).map(function (r) { return q[r.idx]; });
+          setPending(failed);
+          return failed.length;
+        });
+      }
+
+      /* ===== Date helpers ===== */
+      function startOfDay(d) {
+        var x = new Date(d);
+        x.setHours(0, 0, 0, 0);
+        return x;
+      }
+      function sameDay(a, b) {
+        return a.getFullYear() === b.getFullYear() &&
+          a.getMonth() === b.getMonth() &&
+          a.getDate() === b.getDate();
+      }
+      function isoDate(d) {
+        var y = d.getFullYear();
+        var m = String(d.getMonth() + 1).padStart(2, "0");
+        var day = String(d.getDate()).padStart(2, "0");
+        return y + "-" + m + "-" + day;
+      }
+      function fmtDate(d) {
+        return d.toLocaleDateString("en-US", {
+          weekday: "short", month: "short", day: "numeric", year: "numeric"
+        });
+      }
+      function fmtMonthTitle(d) {
+        return d.toLocaleDateString("en-US", { month: "long", year: "numeric" });
+      }
+
+      /* ===== State ===== */
+      var tasks = [];
+      var today = startOfDay(new Date());
+      var viewMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+      var selectedDate = null;
+      var tempIdCounter = 0;
+
+      var calGrid = document.getElementById("calGrid");
+      var calTitle = document.getElementById("calTitle");
+      var todoForm = document.getElementById("todoForm");
+      var todoInput = document.getElementById("todoInput");
+      var todoDateTag = document.getElementById("todoDateTag");
+      var todoToday = document.getElementById("todoToday");
+      var todoList = document.getElementById("todoList");
+      var todoEmpty = document.getElementById("todoEmpty");
+      var todoAdd = document.getElementById("todoAdd");
+      var todoCounter = document.getElementById("todoCounter");
+      var todoPriority = document.getElementById("todoPriority");
+      var todoStatus = document.getElementById("todoStatus");
+      var selectedPriority = "medium";
+      var PRIORITY_ORDER = { high: 0, medium: 1, low: 2 };
+
+      function showStatus(msg) {
+        todoStatus.textContent = msg;
+        todoStatus.hidden = !msg;
+      }
+
+      /* ===== Calendar ===== */
+      function renderCalendar() {
+        calTitle.textContent = fmtMonthTitle(viewMonth);
+        var first = new Date(viewMonth.getFullYear(), viewMonth.getMonth(), 1);
+        var startDow = first.getDay();
+        var gridStart = new Date(first);
+        gridStart.setDate(gridStart.getDate() - startDow);
+
+        calGrid.innerHTML = "";
+        for (var i = 0; i < 42; i++) {
+          (function () {
+            var cellDate = new Date(gridStart);
+            cellDate.setDate(gridStart.getDate() + i);
+            var inMonth = cellDate.getMonth() === viewMonth.getMonth();
+            var isToday = sameDay(cellDate, today);
+            var isSelected = selectedDate && sameDay(cellDate, selectedDate);
+
+            var cell = document.createElement("button");
+            cell.type = "button";
+            cell.className = "cal-cell";
+            if (!inMonth) cell.classList.add("cal-cell-out");
+            if (isToday) cell.classList.add("cal-cell-today");
+            if (isSelected) cell.classList.add("cal-cell-sel");
+            cell.textContent = String(cellDate.getDate());
+            cell.addEventListener("click", function () {
+              selectedDate = startOfDay(cellDate);
+              renderCalendar();
+              updateDateTag();
+            });
+            calGrid.appendChild(cell);
+          })();
+        }
+      }
+
+      function updateDateTag() {
+        if (selectedDate) {
+          todoDateTag.textContent = fmtDate(selectedDate);
+          todoDateTag.classList.remove("is-empty");
+        } else {
+          todoDateTag.textContent = "No date selected";
+          todoDateTag.classList.add("is-empty");
+        }
+        todoAdd.disabled = !selectedDate;
+      }
+
+      /* ===== Task list ===== */
+      function renderTasks() {
+        todoList.innerHTML = "";
+        var sorted = tasks.slice().sort(function (a, b) {
+          if (a.done !== b.done) return a.done ? 1 : -1;
+          if (a.date !== b.date) return a.date < b.date ? -1 : 1;
+          var pa = PRIORITY_ORDER[a.priority || "medium"];
+          var pb = PRIORITY_ORDER[b.priority || "medium"];
+          if (pa !== pb) return pa - pb;
+          return 0;
+        });
+        sorted.forEach(function (t) {
+          var li = document.createElement("li");
+          li.className = "todo-item" + (t.done ? " is-done" : "");
+
+          var cb = document.createElement("input");
+          cb.type = "checkbox";
+          cb.checked = !!t.done;
+          cb.id = "cb-" + t.id;
+          cb.addEventListener("change", function () {
+            t.done = cb.checked;
+            renderTasks();
+            dbUpdate(t.id, { done: t.done }).catch(function (e) {
+              t.done = !cb.checked;
+              renderTasks();
+              showStatus("Couldn't save — check your connection.");
+              console.error(e);
+            });
+          });
+
+          var label = document.createElement("div");
+          label.className = "todo-text";
+          var main = document.createElement("span");
+          main.className = "todo-text-main";
+          main.textContent = t.text;
+          main.title = "Click to edit";
+          main.addEventListener("click", function () {
+            startEdit(li, label, main, t);
+          });
+          var badge = document.createElement("span");
+          badge.className = "todo-date-badge";
+          badge.textContent = fmtDate(new Date(t.date + "T00:00:00"));
+          var pBadge = document.createElement("span");
+          var prio = t.priority || "medium";
+          pBadge.className = "todo-priority-badge prio-" + prio;
+          pBadge.textContent = prio.charAt(0).toUpperCase() + prio.slice(1);
+          var meta = document.createElement("span");
+          meta.className = "todo-meta";
+          meta.appendChild(pBadge);
+          meta.appendChild(badge);
+          label.appendChild(main);
+          label.appendChild(meta);
+
+          var del = document.createElement("button");
+          del.type = "button";
+          del.className = "todo-del";
+          del.setAttribute("aria-label", "Delete task");
+          del.innerHTML = "&times;";
+          del.addEventListener("click", function () {
+            var removed = t;
+            tasks = tasks.filter(function (x) { return x.id !== t.id; });
+            renderTasks();
+            dbDelete(removed.id).catch(function (e) {
+              tasks.push(removed);
+              renderTasks();
+              showStatus("Couldn't delete — check your connection.");
+              console.error(e);
+            });
+          });
+
+          li.appendChild(cb);
+          li.appendChild(label);
+          li.appendChild(del);
+          todoList.appendChild(li);
+        });
+        todoEmpty.style.display = tasks.length ? "none" : "";
+        var doneCount = tasks.filter(function (t) { return t.done; }).length;
+        var total = tasks.length;
+        if (total > 0) {
+          todoCounter.hidden = false;
+          todoCounter.textContent = doneCount + " of " + total + " task" + (total === 1 ? "" : "s") + " completed";
+        } else {
+          todoCounter.hidden = true;
+        }
+      }
+
+      function startEdit(li, label, main, t) {
+        var input = document.createElement("input");
+        input.type = "text";
+        input.className = "todo-edit-input";
+        input.value = t.text;
+        input.setAttribute("aria-label", "Edit task");
+        label.replaceChild(input, main);
+        input.focus();
+        input.setSelectionRange(input.value.length, input.value.length);
+        var settled = false;
+        function commit() {
+          if (settled) return;
+          settled = true;
+          var v = input.value.trim();
+          if (v && v !== t.text) {
+            var oldText = t.text;
+            t.text = v;
+            renderTasks();
+            dbUpdate(t.id, { task: v }).catch(function (e) {
+              t.text = oldText;
+              renderTasks();
+              showStatus("Couldn't save — check your connection.");
+              console.error(e);
+            });
+          } else {
+            renderTasks();
+          }
+        }
+        function cancel() {
+          if (settled) return;
+          settled = true;
+          renderTasks();
+        }
+        input.addEventListener("keydown", function (e) {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            commit();
+          } else if (e.key === "Escape") {
+            cancel();
+          }
+        });
+        input.addEventListener("blur", commit);
+      }
+
+      function addTask(text) {
+        var trimmed = (text || "").trim();
+        if (!trimmed || !selectedDate) return;
+        var temp = {
+          id: "tmp-" + (++tempIdCounter),
+          text: trimmed,
+          date: isoDate(selectedDate),
+          priority: selectedPriority,
+          done: false
+        };
+        tasks.push(temp);
+        renderTasks();
+        todoInput.value = "";
+        todoInput.focus();
+        showStatus("");
+        dbInsert(temp).then(function (saved) {
+          var i = tasks.findIndex(function (x) { return x.id === temp.id; });
+          if (i !== -1) {
+            tasks[i] = saved;
+            tasks[i]._pending = false;
+          }
+          renderTasks();
+        }).catch(function (e) {
+          temp._pending = true;
+          enqueue({ type: "insert", task: { text: temp.text, date: temp.date, priority: temp.priority, done: temp.done } });
+          renderTasks();
+          showStatus("Saved locally — will sync when online.");
+          console.warn(e);
+        });
+      }
+
+      /* ===== Events ===== */
+      document.querySelector('[data-action="prev"]').addEventListener("click", function () {
+        viewMonth = new Date(viewMonth.getFullYear(), viewMonth.getMonth() - 1, 1);
+        renderCalendar();
+      });
+      document.querySelector('[data-action="next"]').addEventListener("click", function () {
+        viewMonth = new Date(viewMonth.getFullYear(), viewMonth.getMonth() + 1, 1);
+        renderCalendar();
+      });
+      todoToday.addEventListener("click", function () {
+        selectedDate = startOfDay(new Date());
+        viewMonth = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1);
+        renderCalendar();
+        updateDateTag();
+      });
+      todoPriority.addEventListener("click", function (e) {
+        var btn = e.target.closest(".priority-btn");
+        if (!btn) return;
+        selectedPriority = btn.getAttribute("data-priority");
+        todoPriority.querySelectorAll(".priority-btn").forEach(function (b) {
+          b.classList.toggle("is-active", b === btn);
+        });
+      });
+      todoForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        addTask(todoInput.value);
+      });
+
+      /* ===== One-time localStorage → Supabase migration ===== */
+      var LEGACY_KEY = "todo.tasks.v1";
+
+      function migrateLocal() {
+        var raw;
+        try { raw = localStorage.getItem(LEGACY_KEY); } catch (e) { return Promise.resolve(0); }
+        if (!raw) return Promise.resolve(0);
+        var arr;
+        try { arr = JSON.parse(raw); } catch (e) { arr = []; }
+        if (!Array.isArray(arr) || !arr.length) return Promise.resolve(0);
+        var rows = arr
+          .filter(function (t) { return t && t.text && t.date; })
+          .map(function (t) {
+            return {
+              task: t.text,
+              date: t.date,
+              priority: t.priority || "medium",
+              done: !!t.done
+            };
+          });
+        if (!rows.length) return Promise.resolve(0);
+        return dbRequest("POST", "", rows, "return=minimal").then(function () {
+          try { localStorage.removeItem(LEGACY_KEY); } catch (e) {}
+          return rows.length;
+        });
+      }
+
+      /* ===== Init ===== */
+      renderCalendar();
+      updateDateTag();
+      todoEmpty.textContent = "Loading tasks…";
+      dbLoadAll().then(function (rows) {
+        return migrateLocal().then(function (migrated) {
+          if (migrated > 0) return dbLoadAll();
+          return rows;
+        });
+      }).then(function (rows) {
+        tasks = rows;
+        todoEmpty.textContent = "No tasks yet. Pick a date and add one.";
+        renderTasks();
+        return syncPending();
+      }).then(function (failedCount) {
+        if (failedCount > 0) {
+          showStatus(failedCount + " change" + (failedCount === 1 ? "" : "s") + " still unsynced — will retry.");
+        } else if (failedCount === 0 && getPending().length === 0) {
+          showStatus("");
+        }
+        renderTasks();
+      }).catch(function (e) {
+        todoEmpty.textContent = "Couldn't load tasks — check your connection.";
+        showStatus("Couldn't reach Supabase.");
+        console.error(e);
+      });
+
+      window.addEventListener("online", function () {
+        if (!getPending().length) return;
+        syncPending().then(function (failedCount) {
+          if (failedCount === 0) showStatus("");
+          renderTasks();
+        }).catch(function () {});
+      });
+
+      // Retry queued ops every 30s — covers cases where the browser never
+      // fired "online" (e.g. connection resets without full disconnect)
+      setInterval(function () {
+        if (!getPending().length) return;
+        syncPending().then(function (failedCount) {
+          if (failedCount === 0) showStatus("");
+          renderTasks();
+        }).catch(function () {});
+      }, 30000);
+    })();
+  </script>
+
+  <script>
+    (function () {
+      "use strict";
+
+      /* ===== Weather (Open-Meteo: geocoding + forecast) =====
+         The previous provider could not resolve ambiguous city names — it has
+         no geocoding endpoint, ignores coordinates, and returns a single
+         nondeterministic match. Candidate locations therefore come from
+         Open-Meteo geocoding, and the weather is fetched by the coordinates
+         of the candidate the user selects. */
+      var GEO_URL = "https://geocoding-api.open-meteo.com/v1/search";
+      var WX_URL = "https://api.open-meteo.com/v1/forecast";
+
+      var form = document.getElementById("weatherForm");
+      if (!form) return;
+
+      var input = document.getElementById("weatherInput");
+      var searchBtn = document.getElementById("weatherSearch");
+      var statusEl = document.getElementById("weatherStatus");
+      var resultEl = document.getElementById("weatherResult");
+      var iconEl = document.getElementById("weatherIcon");
+      var cityEl = document.getElementById("weatherCityName");
+      var tempEl = document.getElementById("weatherTemp");
+      var condEl = document.getElementById("weatherCond");
+      var forecastEl = document.getElementById("weatherForecast");
+      var unitGroup = document.getElementById("weatherUnit");
+      var candidatesEl = document.getElementById("weatherCandidates");
+
+      var MSG_NOT_FOUND = "Couldn't find that city — check the spelling.";
+      var MSG_EMPTY = "Enter a city first.";
+
+      /* Temperature unit — Celsius by default. */
+      var unit = "C";
+      /* Last successful response, re-rendered on a unit change (no new request). */
+      var lastData = null;
+
+      function showStatus(msg, isError) {
+        statusEl.textContent = msg;
+        statusEl.hidden = !msg;
+        statusEl.classList.toggle("is-error", !!isError);
+      }
+
+      function hideCandidates() {
+        candidatesEl.hidden = true;
+        candidatesEl.innerHTML = "";
+      }
+
+      /* WMO weather codes (as returned by Open-Meteo) -> English label + emoji. */
+      function wmoInfo(code) {
+        var c = parseInt(code, 10);
+        switch (c) {
+          case 0: return { label: "Clear sky", emoji: "☀️" };
+          case 1: return { label: "Mainly clear", emoji: "🌤️" };
+          case 2: return { label: "Partly cloudy", emoji: "⛅" };
+          case 3: return { label: "Overcast", emoji: "☁️" };
+          case 45:
+          case 48: return { label: "Fog", emoji: "🌫️" };
+          case 51: return { label: "Light drizzle", emoji: "🌦️" };
+          case 53: return { label: "Moderate drizzle", emoji: "🌦️" };
+          case 55: return { label: "Dense drizzle", emoji: "🌧️" };
+          case 56:
+          case 57: return { label: "Freezing drizzle", emoji: "🌧️" };
+          case 61: return { label: "Light rain", emoji: "🌦️" };
+          case 63: return { label: "Moderate rain", emoji: "🌧️" };
+          case 65: return { label: "Heavy rain", emoji: "🌧️" };
+          case 66:
+          case 67: return { label: "Freezing rain", emoji: "🌧️" };
+          case 71: return { label: "Light snow", emoji: "🌨️" };
+          case 73: return { label: "Moderate snow", emoji: "❄️" };
+          case 75: return { label: "Heavy snow", emoji: "❄️" };
+          case 77: return { label: "Snow grains", emoji: "🌨️" };
+          case 80: return { label: "Light showers", emoji: "🌦️" };
+          case 81: return { label: "Moderate showers", emoji: "🌧️" };
+          case 82: return { label: "Violent showers", emoji: "⛈️" };
+          case 85: return { label: "Snow showers", emoji: "🌨️" };
+          case 86: return { label: "Heavy snow showers", emoji: "❄️" };
+          case 95: return { label: "Thunderstorm", emoji: "⛈️" };
+          case 96:
+          case 99: return { label: "Thunderstorm with hail", emoji: "⛈️" };
+          default: return { label: "Unknown", emoji: "🌡️" };
+        }
+      }
+
+      function wait(ms) {
+        return new Promise(function (resolve) { setTimeout(resolve, ms); });
+      }
+
+      /* GET JSON with a couple of retries — Open-Meteo occasionally answers
+         with a transient "service overloaded" response. */
+      function fetchJson(url, tries) {
+        if (tries == null) tries = 3;
+        return fetch(url, { headers: { "Accept": "application/json" } })
+          .then(function (res) {
+            return res.json().catch(function () { return null; }).then(function (body) {
+              if (!res.ok || (body && body.error)) throw new Error("HTTP " + res.status);
+              return body;
+            });
+          })
+          .catch(function (err) {
+            if (tries > 1) return wait(700).then(function () { return fetchJson(url, tries - 1); });
+            throw err;
+          });
+      }
+
+      /* Compare names case- and diacritic-insensitively. */
+      function normName(value) {
+        var s = String(value == null ? "" : value).trim().toLowerCase();
+        return s.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      }
+
+      function isPlace(result) {
+        var fc = result && result.feature_code;
+        return typeof fc === "string" && fc.indexOf("PPL") === 0;
+      }
+
+      /* Candidate locations for the query. Prefers exact name matches; if the
+         API returned none, keeps its own fuzzy matches. Never invents places. */
+      function geocode(query) {
+        var lang = /[\u3400-\u9fff]/.test(query) ? "zh" : "en";
+        var url = GEO_URL + "?name=" + encodeURIComponent(query) + "&count=10&language=" + lang;
+        return fetchJson(url, 3).then(function (data) {
+          var places = ((data && data.results) || []).filter(isPlace);
+          var want = normName(query);
+          var exact = places.filter(function (r) { return normName(r.name) === want; });
+          return exact.length ? exact : places;
+        });
+      }
+
+      function fetchWeather(candidate) {
+        var url = WX_URL +
+          "?latitude=" + encodeURIComponent(candidate.latitude) +
+          "&longitude=" + encodeURIComponent(candidate.longitude) +
+          "&current=temperature_2m,weather_code" +
+          "&daily=weather_code,temperature_2m_max,temperature_2m_min" +
+          "&timezone=auto&forecast_days=4";
+        return fetchJson(url, 3);
+      }
+
+      /* Region detail for a candidate: admin area(s) + country. */
+      function regionText(candidate) {
+        var parts = [];
+        [candidate.admin1, candidate.admin2, candidate.country].forEach(function (p) {
+          if (p && p !== candidate.name && parts.indexOf(p) === -1) parts.push(p);
+        });
+        return parts.join(" · ");
+      }
+
+      function placeText(candidate) {
+        var region = regionText(candidate);
+        return region ? candidate.name + ", " + region.split(" · ").join(", ") : candidate.name;
+      }
+
+      /* Map an Open-Meteo response to the shape the UI renders. */
+      function toView(candidate, wx) {
+        var daily = wx.daily || {};
+        var dates = daily.time || [];
+        var codes = daily.weather_code || [];
+        var maxs = daily.temperature_2m_max || [];
+        var mins = daily.temperature_2m_min || [];
+        var forecast = [];
+        for (var i = 0; i < dates.length && i < 4; i++) {
+          forecast.push({ date: dates[i], code: codes[i], max: maxs[i], min: mins[i] });
+        }
+        return {
+          place: placeText(candidate),
+          temperature: wx.current ? wx.current.temperature_2m : undefined,
+          code: wx.current ? wx.current.weather_code : undefined,
+          forecast: forecast
+        };
+      }
+
+      /* F = (C × 9/5) + 32 */
+      function toFahrenheit(celsius) {
+        return (celsius * 9 / 5) + 32;
+      }
+
+      function fmtTemp(value) {
+        var n = Number(value);
+        if (isNaN(n)) return "—";
+        var converted = unit === "F" ? toFahrenheit(n) : n;
+        return (Math.round(converted * 10) / 10) + "°" + unit;
+      }
+
+      function dayLabel(day) {
+        if (!day.date) return "";
+        var dt = new Date(day.date + "T00:00:00");
+        if (isNaN(dt.getTime())) return "";
+        return dt.toLocaleDateString("en-US", { weekday: "short", day: "numeric" });
+      }
+
+      /* Show up to 3 days from the API's forecast array (we do not invent days). */
+      function renderForecast(days) {
+        forecastEl.innerHTML = "";
+
+        /* No forecast in the response — say so rather than pad with fake values. */
+        if (!days || !days.length) {
+          var note = document.createElement("p");
+          note.className = "forecast-empty";
+          note.textContent = "3-day forecast isn't available for this location.";
+          forecastEl.appendChild(note);
+          forecastEl.hidden = false;
+          return;
+        }
+
+        /* slice() never pads: if the API returns fewer days, we show fewer. */
+        days.slice(0, 3).forEach(function (day) {
+          var info = wmoInfo(day.code);
+
+          var cell = document.createElement("div");
+          cell.className = "forecast-day";
+
+          var label = document.createElement("div");
+          label.className = "forecast-label";
+          label.textContent = dayLabel(day);
+
+          var icon = document.createElement("div");
+          icon.className = "forecast-icon";
+          icon.textContent = info.emoji;
+          icon.setAttribute("aria-hidden", "true");
+
+          var cond = document.createElement("div");
+          cond.className = "forecast-cond";
+          cond.textContent = info.label;
+
+          var temps = document.createElement("div");
+          temps.className = "forecast-temps";
+
+          var max = document.createElement("span");
+          max.className = "forecast-max";
+          max.textContent = fmtTemp(day.max);
+
+          var sep = document.createElement("span");
+          sep.className = "forecast-sep";
+          sep.textContent = "/";
+
+          var min = document.createElement("span");
+          min.className = "forecast-min";
+          min.textContent = fmtTemp(day.min);
+
+          temps.appendChild(max);
+          temps.appendChild(sep);
+          temps.appendChild(min);
+
+          cell.appendChild(label);
+          cell.appendChild(icon);
+          cell.appendChild(cond);
+          cell.appendChild(temps);
+          forecastEl.appendChild(cell);
+        });
+
+        forecastEl.hidden = false;
+      }
+
+      function render(data) {
+        lastData = data;
+        var info = wmoInfo(data.code);
+        iconEl.textContent = info.emoji;
+        cityEl.textContent = data.place || "Unknown";
+        tempEl.textContent = fmtTemp(data.temperature);
+        condEl.textContent = info.label;
+        renderForecast(data.forecast);
+        resultEl.hidden = false;
+      }
+
+      /* Selection list shown only when the name matches several places. */
+      function renderCandidates(list) {
+        candidatesEl.innerHTML = "";
+        list.forEach(function (candidate) {
+          var btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "candidate";
+
+          var name = document.createElement("span");
+          name.className = "candidate-name";
+          name.textContent = candidate.name;
+
+          var region = document.createElement("span");
+          region.className = "candidate-region";
+          region.textContent = regionText(candidate);
+
+          btn.appendChild(name);
+          btn.appendChild(region);
+          btn.addEventListener("click", function () {
+            hideCandidates();
+            loadWeather(candidate);
+          });
+
+          candidatesEl.appendChild(btn);
+        });
+        candidatesEl.hidden = false;
+      }
+
+      /* Fetch + display weather for one chosen location. */
+      function loadWeather(candidate) {
+        resultEl.hidden = true;
+        showStatus("Loading…", false);
+        searchBtn.disabled = true;
+
+        fetchWeather(candidate)
+          .then(function (wx) {
+            searchBtn.disabled = false;
+            if (!wx || !wx.current || typeof wx.current.temperature_2m !== "number") {
+              showStatus(MSG_NOT_FOUND, true);
+              return;
+            }
+            render(toView(candidate, wx));
+            showStatus("", false);
+          })
+          .catch(function () {
+            searchBtn.disabled = false;
+            showStatus("Couldn't load the weather — check your connection and try again.", true);
+          });
+      }
+
+      function search() {
+        var query = input.value.trim();
+
+        if (!query) {
+          hideCandidates();
+          resultEl.hidden = true;
+          showStatus(MSG_EMPTY, true);
+          return;
+        }
+
+        hideCandidates();
+        resultEl.hidden = true;
+        showStatus("Loading…", false);
+        searchBtn.disabled = true;
+
+        geocode(query)
+          .then(function (list) {
+            if (!list.length) {
+              searchBtn.disabled = false;
+              showStatus(MSG_NOT_FOUND, true);
+              return;
+            }
+            /* Exactly one reliable location -> straight to its weather. */
+            if (list.length === 1) {
+              loadWeather(list[0]);
+              return;
+            }
+            searchBtn.disabled = false;
+            showStatus("", false);
+            renderCandidates(list);
+          })
+          .catch(function () {
+            searchBtn.disabled = false;
+            showStatus("Couldn't search for that city — check your connection and try again.", true);
+          });
+      }
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        search();
+      });
+
+      /* °C / °F toggle — re-renders the cached response, never re-fetches. */
+      unitGroup.addEventListener("click", function (e) {
+        var btn = e.target.closest(".unit-btn");
+        if (!btn) return;
+        var next = btn.getAttribute("data-unit");
+        if (next === unit) return;
+        unit = next;
+        unitGroup.querySelectorAll(".unit-btn").forEach(function (b) {
+          b.classList.toggle("is-active", b === btn);
+        });
+        if (lastData) render(lastData);
+      });
+    })();
+  </script>
+
+  <script>
+    (function () {
+      "use strict";
+
+      /* ===== World Time (UAPI) ===== */
+      var WORLDTIME_URL = "https://uapis.cn/api/v1/misc/worldtime";
+
+      var form = document.getElementById("worldTimeForm");
+      if (!form) return;
+
+      var input = document.getElementById("worldTimeInput");
+      var searchBtn = document.getElementById("worldTimeSearch");
+      var statusEl = document.getElementById("worldTimeStatus");
+      var resultEl = document.getElementById("worldTimeResult");
+      var clockEl = document.getElementById("worldTimeClock");
+      var cityEl = document.getElementById("worldTimeCityName");
+      var dateEl = document.getElementById("worldTimeDate");
+      var zoneEl = document.getElementById("worldTimeZone");
+
+      var MSG_NOT_FOUND = "Couldn't find that city — check the spelling.";
+      var MSG_EMPTY = "Enter a city first.";
+
+      function showStatus(msg, isError) {
+        statusEl.textContent = msg;
+        statusEl.hidden = !msg;
+        statusEl.classList.toggle("is-error", !!isError);
+      }
+
+      /* The API returns datetime as "YYYY-MM-DD HH:MM:SS"; split it as-is. */
+      function splitDatetime(value) {
+        var parts = String(value).trim().split(/\s+/);
+        return { date: parts[0] || "", time: parts[1] || "" };
+      }
+
+      function render(data) {
+        var dt = splitDatetime(data.datetime);
+        clockEl.textContent = dt.time || "—";
+        cityEl.textContent = data.query || "—";
+
+        var dateBits = [];
+        if (data.weekday) dateBits.push(data.weekday);
+        if (dt.date) dateBits.push(dt.date);
+        dateEl.textContent = dateBits.join(" · ");
+
+        /* Show only the time-zone values the API actually returned. */
+        var zoneBits = [];
+        if (data.timezone) zoneBits.push(data.timezone);
+        if (data.offset_string) zoneBits.push(data.offset_string);
+        zoneEl.textContent = zoneBits.join(" · ");
+        zoneEl.hidden = zoneBits.length === 0;
+
+        resultEl.hidden = false;
+      }
+
+      function search() {
+        var city = input.value.trim();
+
+        if (!city) {
+          resultEl.hidden = true;
+          showStatus(MSG_EMPTY, true);
+          return;
+        }
+
+        resultEl.hidden = true;
+        showStatus("Loading…", false);
+        searchBtn.disabled = true;
+
+        function finish() { searchBtn.disabled = false; }
+
+        fetch(WORLDTIME_URL + "?city=" + encodeURIComponent(city), {
+          headers: { "Accept": "application/json" }
+        })
+          .then(function (res) {
+            return res.json().catch(function () { return null; }).then(function (body) {
+              if (!res.ok) {
+                var e = new Error("HTTP " + res.status);
+                e.notFound = true;
+                throw e;
+              }
+              return body;
+            });
+          })
+          .then(function (data) {
+            finish();
+            /* Require the fields we render; never fabricate a result. */
+            if (!data || !data.datetime || !data.timezone) {
+              showStatus(MSG_NOT_FOUND, true);
+              return;
+            }
+            render(data);
+            showStatus("", false);
+          })
+          .catch(function (err) {
+            finish();
+            if (err && err.notFound) {
+              showStatus(MSG_NOT_FOUND, true);
+            } else {
+              showStatus("Couldn't load the time — check your connection and try again.", true);
+            }
+          });
+      }
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        search();
+      });
+    })();
+  </script>
+</body>
+</html>
